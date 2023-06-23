@@ -169,7 +169,6 @@ private fun CardContent(name: String ) {
     }
 }
 
-
 @Preview(
     showBackground = true,
     widthDp = 320,
