@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,14 +14,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.Icons.Filled
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -40,6 +37,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.brandonreyes.sesion5codelab.data.Contact
 import com.brandonreyes.sesion5codelab.ui.theme.Sesion5CodelabTheme
 
 class MainActivity : ComponentActivity() {
@@ -93,12 +91,13 @@ fun OnboardingScreen(
 @Composable
 private fun Greetings(
     modifier: Modifier = Modifier,
-    names:List<String> = List(30) {"$it"}
+    //names:List<String> = List(30) {"$it"}
+    contacts: List<Contact> = contactList()
+
 ){
     LazyColumn(modifier = modifier.padding(vertical = 4.dp)) {
-        items (items = names) { name ->
-            Greeting(name = name)
-
+        items (items = contacts){ name ->
+            Greeting(name)
         }
     }
 
@@ -114,19 +113,19 @@ fun OnboardingPreview() {
 }
 
 @Composable
-private fun Greeting(name: String) {
+private fun Greeting(contacts: Contact) {
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary
         ),
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
-        CardContent(name)
+        CardContent(contacts)
     }
 }
 
 @Composable
-private fun CardContent(name: String ) {
+private fun CardContent(list: Contact ) {
     var expanded by remember { mutableStateOf(false) }
 
     Row(
@@ -144,16 +143,18 @@ private fun CardContent(name: String ) {
                 .weight(1f)
                 .padding(12.dp)
         ) {
-            Text(text = "Marco Antonio Posadas")
+            Text(list.id.toString())
             Text(
-                text = name, style = MaterialTheme.typography.headlineMedium.copy(
+                text = list.name, style = MaterialTheme.typography.headlineMedium.copy(
                     fontWeight = FontWeight.ExtraBold
                 )
             )
             if (expanded) {
-                Text(
-                    text = ("Marco Antonio Posadas Rodriguez ")
-                )
+                Text(list.position)
+                Text(list.plant)
+                Text(list.email)
+                Text(list.phone)
+
             }
         }
         IconButton(onClick = { expanded = !expanded }) {
@@ -190,4 +191,11 @@ fun MyAppPreview(){
     Sesion5CodelabTheme {
         MyApp(modifier = Modifier.fillMaxSize())
     }
+}
+
+fun contactList(): List<Contact>{
+    return listOf(
+        Contact(1, "Brandon Cruz Reyes", "Asistente de sistema", "Planta Principal", "Bcruz@handsome.com.ni", "3993-3999"),
+        Contact(2, "Jairo Gadea", "Asistente de sistema", "Planta 3", "Jgadea@handsome.com.ni", "3500")
+    )
 }
