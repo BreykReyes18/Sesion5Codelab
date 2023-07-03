@@ -195,7 +195,8 @@ fun MyAppPreview(){
 
 fun contactList(): List<Contact>{
     return listOf(
-        Contact(1, "Brandon Cruz Reyes", "Asistente de sistema", "Planta Principal", "Bcruz@handsome.com.ni", "3993-3999"),
-        Contact(2, "Jairo Gadea", "Asistente de sistema", "Planta 3", "Jgadea@handsome.com.ni", "3500")
+        Contact(1, "Brandon Cruz Reyes", "Asistente de Sistemas IT-EDI", "Planta Principal", "Email: Bcruz@handsome.com.ni", "Ext: 3993-3999"),
+        Contact(2, "Jairo Emilio Gadea", "Asistente de Sistemas IT-EDI", "Planta 3", "Email: Jgadea@handsome.com.ni", "Ext: 3500"),
+        Contact(3, "Marco Antonio Posadas", "Gerente de Sistemas IT-EDI", "Planta Principal", "Email: Mposadas@handsome.com.ni", "Ext: 3955")
     )
 }
